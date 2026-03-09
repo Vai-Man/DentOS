@@ -13,10 +13,10 @@ export default function WorkflowBuilder() {
   const { workflowSteps, toggleStepCompleted } = useDentOSStore();
 
   return (
-    <div className="rounded-lg border border-border bg-card p-4">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-foreground">Extraction Workflow</h3>
-        <span className="text-xs text-muted-foreground font-mono">
+    <div className="rounded-lg border border-border bg-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-base font-semibold text-foreground">Extraction Workflow</h3>
+        <span className="text-sm text-muted-foreground font-mono">
           {workflowSteps.filter(s => s.completed).length}/{workflowSteps.length} steps
         </span>
       </div>
@@ -31,7 +31,7 @@ export default function WorkflowBuilder() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06 }}
               onClick={() => toggleStepCompleted(step.id)}
-              className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg border cursor-pointer transition-all duration-200 ${
+              className={`group flex items-center gap-3 px-4 py-3 rounded-lg border cursor-pointer transition-all duration-200 ${
                 step.completed
                   ? 'bg-primary/5 border-primary/30 hover:bg-primary/10'
                   : 'bg-muted/30 border-border hover:bg-muted/60 hover:border-muted-foreground/20'
@@ -39,19 +39,19 @@ export default function WorkflowBuilder() {
             >
               <GripVertical className="w-3.5 h-3.5 text-muted-foreground/40 shrink-0" />
               
-              <div className={`w-7 h-7 rounded-md flex items-center justify-center shrink-0 transition-colors ${
+              <div className={`w-8 h-8 rounded-md flex items-center justify-center shrink-0 transition-colors ${
                 step.completed ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'
               }`}>
                 {step.completed ? <Check className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
               </div>
 
               <div className="flex-1 min-w-0">
-                <div className={`text-xs font-medium transition-colors ${
+                <div className={`text-sm font-medium transition-colors ${
                   step.completed ? 'text-primary line-through' : 'text-foreground'
                 }`}>
                   {step.order}. {step.label}
                 </div>
-                <div className="text-[11px] text-muted-foreground truncate">
+                <div className="text-xs text-muted-foreground truncate">
                   {step.description}
                 </div>
               </div>

@@ -1,14 +1,16 @@
 import { useDentOSStore } from '@/lib/store';
 import { evaluateCompliance, getComplianceScore, getOverallStatus } from '@/lib/compliance-engine';
 import { motion } from 'framer-motion';
-import { Activity, ShieldCheck, ShieldAlert, Shield, RotateCcw } from 'lucide-react';
+import { Activity, ShieldCheck, ShieldAlert, Shield, RotateCcw, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const state = useDentOSStore();
   const rules = evaluateCompliance(state);
   const score = getComplianceScore(rules);
   const overall = getOverallStatus(rules);
+  const navigate = useNavigate();
 
   const statusMap = {
     compliant: { icon: ShieldCheck, color: 'text-success', label: 'All Clear' },
@@ -29,7 +31,7 @@ export default function Header() {
             <h1 className="text-sm font-bold tracking-tight text-foreground">
               Dent<span className="text-gradient">OS</span>
             </h1>
-            <p className="text-[10px] text-muted-foreground -mt-0.5">Clinical Workflow OS</p>
+            <p className="text-[10px] text-muted-foreground -mt-0.5">A DentoVate product</p>
           </div>
         </div>
 
@@ -54,6 +56,14 @@ export default function Header() {
             onClick={() => state.resetAll()}
           >
             <RotateCcw className="w-3 h-3" /> Reset
+          </Button>
+          <Button
+            size="sm"
+            className="text-xs gap-1.5 h-7 gradient-primary text-primary-foreground border-0 hover:opacity-90"
+            onClick={() => navigate('/triage')}
+          >
+            <Stethoscope className="w-3 h-3" />
+            Triage
           </Button>
         </div>
       </div>

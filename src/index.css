@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -41,6 +41,19 @@
     --ring: 174 72% 46%;
 
     --radius: 0.75rem;
+
+    /* Triage theme tokens — scoped via .triage-root override below */
+    --teal: 174 72% 46%;
+    --teal-light: 174 50% 20%;
+    --deep-blue: 215 60% 20%;
+    --deep-blue-light: 215 40% 30%;
+    --neon-teal: 174 100% 50%;
+    --neon-blue: 210 100% 60%;
+    --emergency: 0 72% 51%;
+    --urgent: 38 92% 50%;
+    --routine: 142 72% 45%;
+    --glass-bg: 210 18% 10% / 0.8;
+    --glass-border: 210 14% 20% / 0.6;
 
     --sidebar-background: 210 18% 8%;
     --sidebar-foreground: 200 20% 80%;
@@ -116,4 +129,153 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(174 72% 46% / 0.5);
+}
+
+/* ─── Triage root scope ─────────────────────────────────────────────────── */
+/* Light mode (default) */
+.triage-root {
+  --background: 210 40% 98%;
+  --foreground: 215 35% 10%;
+  --card: 210 40% 99%;
+  --card-foreground: 215 35% 10%;
+  --popover: 210 40% 99%;
+  --popover-foreground: 215 35% 10%;
+  --primary: 210 80% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 174 60% 40%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 30% 94%;
+  --muted-foreground: 215 15% 50%;
+  --accent: 174 60% 40%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 25% 90%;
+  --input: 210 25% 90%;
+  --ring: 210 80% 45%;
+  --teal: 174 60% 40%;
+  --teal-light: 174 50% 92%;
+  --deep-blue: 215 80% 18%;
+  --deep-blue-light: 215 60% 30%;
+  --neon-teal: 174 100% 50%;
+  --neon-blue: 210 100% 60%;
+  --emergency: 0 72% 55%;
+  --urgent: 30 90% 55%;
+  --routine: 145 60% 42%;
+  --glass-bg: 210 40% 98% / 0.7;
+  --glass-border: 210 30% 90% / 0.5;
+
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+}
+
+/* Dark mode */
+.triage-root.dark {
+  --background: 220 20% 8%;
+  --foreground: 210 30% 92%;
+  --card: 220 18% 11%;
+  --card-foreground: 210 30% 92%;
+  --popover: 220 18% 11%;
+  --popover-foreground: 210 30% 92%;
+  --primary: 210 70% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 174 50% 35%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 220 15% 16%;
+  --muted-foreground: 215 15% 55%;
+  --accent: 174 50% 35%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 15% 18%;
+  --input: 220 15% 18%;
+  --ring: 210 70% 55%;
+  --teal: 174 50% 45%;
+  --teal-light: 174 30% 15%;
+  --deep-blue: 215 50% 25%;
+  --deep-blue-light: 215 40% 35%;
+  --neon-teal: 174 80% 55%;
+  --neon-blue: 210 80% 65%;
+  --glass-bg: 220 18% 11% / 0.8;
+  --glass-border: 220 15% 20% / 0.6;
+
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.triage-root .glass-card {
+  border-radius: 1rem;
+  border: 1px solid;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  background: hsla(var(--glass-bg));
+  border-color: hsla(var(--glass-border));
+  box-shadow: 0 8px 32px hsla(210, 40%, 20%, 0.08), 0 0 0 1px hsla(210, 30%, 90%, 0.3);
+}
+
+.triage-root .glass-card-elevated {
+  border-radius: 1rem;
+  border: 1px solid;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  background: hsla(var(--glass-bg));
+  border-color: hsla(var(--glass-border));
+  box-shadow: 0 20px 60px hsla(210, 40%, 20%, 0.12), 0 0 0 1px hsla(210, 30%, 90%, 0.3);
+}
+
+.triage-root .gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--teal)));
+}
+
+.triage-root .gradient-bg {
+  background: linear-gradient(135deg, hsl(var(--deep-blue)), hsl(var(--primary)), hsl(var(--teal)));
+}
+
+.triage-root .gradient-bg-subtle {
+  background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--teal-light)));
+}
+
+.triage-root .neon-glow {
+  box-shadow: 0 0 20px hsla(var(--neon-teal), 0.3), 0 0 40px hsla(var(--neon-teal), 0.1);
+}
+
+.triage-root .badge-emergency {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: hsla(var(--emergency), 0.12);
+  color: hsl(var(--emergency));
+}
+
+.triage-root .badge-urgent {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: hsla(var(--urgent), 0.12);
+  color: hsl(var(--urgent));
+}
+
+.triage-root .badge-routine {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: hsla(var(--routine), 0.12);
+  color: hsl(var(--routine));
+}
+
+.triage-root .animate-pulse-glow {
+  animation: triage-pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes triage-pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }

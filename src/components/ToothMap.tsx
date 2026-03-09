@@ -39,21 +39,22 @@ const TEETH_LOWER = [
   { id: 38, x: 518, y: 170, type: 'molar' },
 ];
 
-function getToothSize(type: string) {
+function getToothSize(type: string, expanded = false) {
+  const scale = expanded ? 1.8 : 1;
   switch (type) {
-    case 'molar': return 22;
-    case 'premolar': return 18;
-    case 'canine': return 16;
-    case 'incisor': return 15;
-    default: return 18;
+    case 'molar': return 22 * scale;
+    case 'premolar': return 18 * scale;
+    case 'canine': return 16 * scale;
+    case 'incisor': return 15 * scale;
+    default: return 18 * scale;
   }
 }
 
-export default function ToothMap() {
+export default function ToothMap({ expanded = false }: { expanded?: boolean }) {
   const { selectedTooth, setSelectedTooth } = useDentOSStore();
 
   const renderTooth = (tooth: { id: number; x: number; y: number; type: string }) => {
-    const size = getToothSize(tooth.type);
+    const size = getToothSize(tooth.type, expanded);
     const isSelected = selectedTooth === tooth.id;
 
     return (
@@ -107,6 +108,38 @@ export default function ToothMap() {
     );
   };
 
+  const svgContent = (
+    <svg viewBox="0 0 548 220" className="w-full">
+      {/* Arch lines */}
+      <path d="M 30 80 Q 274 -20 518 80" fill="none" className="stroke-border" strokeWidth={1} strokeDasharray="4 4" />
+      <path d="M 30 140 Q 274 240 518 140" fill="none" className="stroke-border" strokeWidth={1} strokeDasharray="4 4" />
+      {/* Labels */}
+      <text x="274" y="8" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">UPPER</text>
+      <text x="274" y="218" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">LOWER</text>
+      <line x1="274" y1="95" x2="274" y2="125" className="stroke-border" strokeWidth={1} />
+      {TEETH_UPPER.map(renderTooth)}
+      {TEETH_LOWER.map(renderTooth)}
+    </svg>
+  );
+
+  if (expanded) {
+    return (
+      <div className="w-full px-2 py-2">
+        {selectedTooth && (
+          <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-4">
+            <span className="text-sm font-mono px-3 py-1.5 rounded-md bg-primary/10 text-primary border border-primary/20">
+              Tooth #{selectedTooth} selected
+            </span>
+          </motion.div>
+        )}
+        {svgContent}
+        <p className="text-sm text-muted-foreground text-center mt-3">
+          Click a tooth to select for extraction
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-lg border border-border bg-card p-4">
       <div className="flex items-center justify-between mb-3">
@@ -121,30 +154,7 @@ export default function ToothMap() {
           </motion.span>
         )}
       </div>
-      <svg viewBox="0 0 548 220" className="w-full">
-        {/* Arch lines */}
-        <path
-          d="M 30 80 Q 274 -20 518 80"
-          fill="none"
-          className="stroke-border"
-          strokeWidth={1}
-          strokeDasharray="4 4"
-        />
-        <path
-          d="M 30 140 Q 274 240 518 140"
-          fill="none"
-          className="stroke-border"
-          strokeWidth={1}
-          strokeDasharray="4 4"
-        />
-        {/* Labels */}
-        <text x="274" y="8" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">UPPER</text>
-        <text x="274" y="218" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">LOWER</text>
-        <line x1="274" y1="95" x2="274" y2="125" className="stroke-border" strokeWidth={1} />
-        
-        {TEETH_UPPER.map(renderTooth)}
-        {TEETH_LOWER.map(renderTooth)}
-      </svg>
+      {svgContent}
       <p className="text-[11px] text-muted-foreground text-center mt-2">
         Click a tooth to select for extraction
       </p>

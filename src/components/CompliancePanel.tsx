@@ -19,9 +19,9 @@ export default function CompliancePanel() {
   const StatusIcon = config.icon;
 
   return (
-    <div className="rounded-lg border border-border bg-card p-4 space-y-4">
+    <div className="rounded-lg border border-border bg-card p-5 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-foreground">Compliance Status</h3>
+        <h3 className="text-base font-semibold text-foreground">Compliance Status</h3>
         <motion.div
           key={overall}
           initial={{ scale: 0.8, opacity: 0 }}
@@ -36,8 +36,8 @@ export default function CompliancePanel() {
       {/* Score bar */}
       <div>
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-xs text-muted-foreground">Compliance Score</span>
-          <span className={`text-sm font-mono font-bold ${config.color}`}>{score}%</span>
+          <span className="text-sm text-muted-foreground">Compliance Score</span>
+          <span className={`text-base font-mono font-bold ${config.color}`}>{score}%</span>
         </div>
         <div className="h-2 rounded-full bg-muted overflow-hidden">
           <motion.div
@@ -59,7 +59,7 @@ export default function CompliancePanel() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
-            className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-xs transition-colors ${
+            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-md text-sm transition-colors ${
               rule.status === 'pass'
                 ? 'bg-success/5 border border-success/20'
                 : rule.status === 'fail'
@@ -85,7 +85,7 @@ export default function CompliancePanel() {
                 — {rule.description}
               </span>
             </div>
-            <span className={`text-[10px] font-mono uppercase ${
+            <span className={`text-xs font-mono uppercase ${
               rule.status === 'pass' ? 'text-success' :
               rule.status === 'fail' ? 'text-destructive' : 'text-muted-foreground'
             }`}>
