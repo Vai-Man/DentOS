@@ -109,13 +109,13 @@ export default function ToothMap({ expanded = false }: { expanded?: boolean }) {
   };
 
   const svgContent = (
-    <svg viewBox="0 0 548 220" className="w-full">
+    <svg viewBox={expanded ? "-20 -30 588 280" : "0 0 548 220"} className="w-full">
       {/* Arch lines */}
       <path d="M 30 80 Q 274 -20 518 80" fill="none" className="stroke-border" strokeWidth={1} strokeDasharray="4 4" />
       <path d="M 30 140 Q 274 240 518 140" fill="none" className="stroke-border" strokeWidth={1} strokeDasharray="4 4" />
       {/* Labels */}
-      <text x="274" y="8" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">UPPER</text>
-      <text x="274" y="218" textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">LOWER</text>
+      <text x="274" y={expanded ? "-5" : "8"} textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">UPPER</text>
+      <text x="274" y={expanded ? "235" : "218"} textAnchor="middle" className="fill-muted-foreground text-[10px] font-medium">LOWER</text>
       <line x1="274" y1="95" x2="274" y2="125" className="stroke-border" strokeWidth={1} />
       {TEETH_UPPER.map(renderTooth)}
       {TEETH_LOWER.map(renderTooth)}
